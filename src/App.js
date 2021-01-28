@@ -16,6 +16,8 @@ import ProductList from "./components/ProductList";
 import { ThemeProvider } from "styled-components";
 // Data
 import products from "./products";
+import { Helmet } from "react-helmet";
+import { Route, Switch, Link } from "react-router-dom";
 
 const theme = {
   light: {
@@ -34,7 +36,6 @@ const theme = {
 
 function App() {
   const [currentTheme, setCurrentTheme] = useState("light");
-  const [product, setProduct] = useState(null);
   const [_products, setProducts] = useState(products);
 
   const deleteProduct = (productId) => {
@@ -42,40 +43,34 @@ function App() {
       (product) => product.id !== +productId
     );
     setProducts(updatedProducts);
-    setProduct(null);
-  };
-
-  const selectProduct = (productId) => {
-    const selectedProduct = products.find(
-      (product) => product.id === productId
-    );
-    setProduct(selectedProduct);
   };
 
   const toggleTheme = () =>
     setCurrentTheme(currentTheme === "light" ? "dark" : "light");
 
-  const setView = () =>
-    product ? (
-      <ProductDetail
-        product={product}
-        deleteProduct={deleteProduct}
-        selectProduct={selectProduct}
-      />
-    ) : (
-      <ProductList
-        products={_products}
-        deleteProduct={deleteProduct}
-        selectProduct={selectProduct}
-      />
-    );
-
   return (
     <ThemeProvider theme={theme[currentTheme]}>
       <GlobalStyle />
       <NavBar currentTheme={currentTheme} toggleTheme={toggleTheme} />
-      <Home />
-      {setView()}
+      <Switch>
+        <Route exact path="/">
+          <Helmet>
+            <title>Home</title>
+            <meta name="description" content="Home page" />
+          </Helmet>
+          <Home />
+        </Route>
+        <Route path="/products/:productSlug">
+          <ProductDetail products={products} deleteProduct={deleteProduct} />
+        </Route>
+        <Route path="/products">
+          <Helmet>
+            <title>Products</title>
+            <meta name="description" content="Our list of products" />
+          </Helmet>
+          <ProductList products={_products} deleteProduct={deleteProduct} />
+        </Route>
+      </Switch>
     </ThemeProvider>
   );
 }

@@ -17,7 +17,6 @@ const ProductList = (props) => {
         product={product}
         key={product.id}
         deleteProduct={props.deleteProduct}
-        selectProduct={props.selectProduct}
       />
     ));
 

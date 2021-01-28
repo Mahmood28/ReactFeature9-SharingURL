@@ -1,6 +1,7 @@
 const products = [
   {
     id: 1,
+    slug: "chocolate",
     name: "Chocolate Chip Cookie",
     price: 10,
     description: "some cookie.. sold by dozens",
@@ -9,6 +10,7 @@ const products = [
   },
   {
     id: 2,
+    slug: "cute",
     name: "Cute Cookie",
     price: 15,
     description: "some cookie.. sold by dozens",
@@ -17,6 +19,7 @@ const products = [
   },
   {
     id: 3,
+    slug: "katakeet",
     name: "Katakeet Cookie",
     price: 7,
     description: "some cookie.. sold by dozens",

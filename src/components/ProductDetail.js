@@ -2,13 +2,21 @@
 import DeleteButton from "./buttons/DeleteButton";
 // Styling
 import { DetailWrapper } from "../styles";
+import { useParams, Redirect } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const ProductDetail = (props) => {
-  const product = props.product;
-
-  return (
+  const { productSlug } = useParams();
+  const products = props.products;
+  const product = products.find((product) => product.slug === productSlug);
+  return !product ? (
+    <Redirect to="/products" />
+  ) : (
     <DetailWrapper>
-      <p onClick={props.selectProduct}>Back to Products</p>
+      <Helmet>
+        <title>{product.name}</title>
+        <meta name="description" content={product.name} />
+      </Helmet>
       <h1>{product.name}</h1>
       <img src={product.image} alt={product.name} />
       <p>{product.description}</p>
