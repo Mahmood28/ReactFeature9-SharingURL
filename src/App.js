@@ -7,6 +7,7 @@ import NavBar from "./components/NavBar";
 // Components
 import ProductDetail from "./components/ProductDetail";
 import ProductList from "./components/ProductList";
+import ProductForm from "./components/ProductForm";
 import { ThemeProvider } from "styled-components";
 // Data
 import { Helmet } from "react-helmet";
@@ -53,6 +54,9 @@ function App() {
             <meta name="description" content="Our list of products" />
           </Helmet>
           <ProductList />
+        </Route>
+        <Route path="/form">
+          <ProductForm />
         </Route>
       </Switch>
     </ThemeProvider>

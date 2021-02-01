@@ -5,6 +5,10 @@ export const DeleteButtonStyled = styled.p`
   color: ${(props) => props.theme.red};
 `;
 
+export const AddButtonStyled = styled(Link)`
+  color: ${(props) => props.theme.red};
+`;
+
 export const Description = styled.h4`
   text-align: center;
 `;

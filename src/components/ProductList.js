@@ -5,6 +5,7 @@ import ProductItem from "./ProductItem";
 import SearchBar from "./SearchBar";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import AddButton from "./buttons/AddButton";
 
 const ProductList = () => {
   const [query, setQuery] = useState("");
@@ -18,6 +19,7 @@ const ProductList = () => {
     <div>
       <SearchBar setQuery={setQuery} />
       <ListWrapper>{productList}</ListWrapper>
+      <AddButton />
     </div>
   );
 };
