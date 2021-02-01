@@ -4,21 +4,15 @@ import { ListWrapper } from "../styles";
 import ProductItem from "./ProductItem";
 import SearchBar from "./SearchBar";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
-const ProductList = (props) => {
+const ProductList = () => {
   const [query, setQuery] = useState("");
-
-  const productList = props.products
+  const productList = useSelector((state) => state.products)
     .filter((product) =>
       product.name.toLowerCase().includes(query.toLowerCase())
     )
-    .map((product) => (
-      <ProductItem
-        product={product}
-        key={product.id}
-        deleteProduct={props.deleteProduct}
-      />
-    ));
+    .map((product) => <ProductItem product={product} key={product.id} />);
 
   return (
     <div>

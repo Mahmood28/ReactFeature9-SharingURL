@@ -1,11 +1,5 @@
 // Styling
-import {
-  Description,
-  GlobalStyle,
-  ShopImage,
-  ThemeButton,
-  Title,
-} from "./styles";
+import { GlobalStyle } from "./styles";
 import React, { useState } from "react";
 
 import Home from "./components/Home";
@@ -15,9 +9,8 @@ import ProductDetail from "./components/ProductDetail";
 import ProductList from "./components/ProductList";
 import { ThemeProvider } from "styled-components";
 // Data
-import products from "./products";
 import { Helmet } from "react-helmet";
-import { Route, Switch, Link } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 const theme = {
   light: {
@@ -36,15 +29,6 @@ const theme = {
 
 function App() {
   const [currentTheme, setCurrentTheme] = useState("light");
-  const [_products, setProducts] = useState(products);
-
-  const deleteProduct = (productId) => {
-    const updatedProducts = _products.filter(
-      (product) => product.id !== +productId
-    );
-    setProducts(updatedProducts);
-  };
-
   const toggleTheme = () =>
     setCurrentTheme(currentTheme === "light" ? "dark" : "light");
 
@@ -61,14 +45,14 @@ function App() {
           <Home />
         </Route>
         <Route path="/products/:productSlug">
-          <ProductDetail products={products} deleteProduct={deleteProduct} />
+          <ProductDetail />
         </Route>
         <Route path="/products">
           <Helmet>
             <title>Products</title>
             <meta name="description" content="Our list of products" />
           </Helmet>
-          <ProductList products={_products} deleteProduct={deleteProduct} />
+          <ProductList />
         </Route>
       </Switch>
     </ThemeProvider>

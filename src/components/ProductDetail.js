@@ -4,11 +4,13 @@ import DeleteButton from "./buttons/DeleteButton";
 import { DetailWrapper } from "../styles";
 import { useParams, Redirect } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import { useSelector } from "react-redux";
 
-const ProductDetail = (props) => {
+const ProductDetail = () => {
   const { productSlug } = useParams();
-  const products = props.products;
-  const product = products.find((product) => product.slug === productSlug);
+  const product = useSelector((state) => state.products).find(
+    (product) => product.slug === productSlug
+  );
   return !product ? (
     <Redirect to="/products" />
   ) : (
@@ -21,10 +23,7 @@ const ProductDetail = (props) => {
       <img src={product.image} alt={product.name} />
       <p>{product.description}</p>
       <p>{product.price} KD</p>
-      <DeleteButton
-        productId={product.id}
-        deleteProduct={props.deleteProduct}
-      />
+      <DeleteButton productId={product.id} />
     </DetailWrapper>
   );
 };

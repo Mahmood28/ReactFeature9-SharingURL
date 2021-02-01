@@ -12,6 +12,7 @@ const NavBar = (props) => {
                 ? "https://cdn.discordapp.com/attachments/797449550616068106/804257167925706762/light-logo.png"
                 : "https://cdn.discordapp.com/attachments/797449550616068106/804257171373162526/dark-logo.png"
             }
+            alt="Cookies and Beyond Logo"
           />
         </Logo>
       </h4>
