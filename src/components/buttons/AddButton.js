@@ -1,15 +1,14 @@
-import { useDispatch } from "react-redux";
 import { AddButtonStyled } from "../../styles";
 import { IoIosAddCircleOutline } from "react-icons/io";
+import { Link } from "react-router-dom";
+
 const AddButton = (props) => {
-  const dispatch = useDispatch();
   return (
-    <AddButtonStyled to="/form">
-      Add Product
-      <h1>
-        <IoIosAddCircleOutline />{" "}
-      </h1>
-    </AddButtonStyled>
+    <Link to="/form">
+      <AddButtonStyled>
+        Add Product <IoIosAddCircleOutline />
+      </AddButtonStyled>
+    </Link>
   );
 };
 

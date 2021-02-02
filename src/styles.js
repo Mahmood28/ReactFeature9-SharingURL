@@ -5,8 +5,18 @@ export const DeleteButtonStyled = styled.p`
   color: ${(props) => props.theme.red};
 `;
 
-export const AddButtonStyled = styled(Link)`
-  color: ${(props) => props.theme.red};
+export const AddButtonStyled = styled.button`
+  color: green;
+  font-size: 1em;
+  padding: 0.25em 1em;
+  border-radius: 3px;
+`;
+
+export const UpdateButtonStyled = styled.button`
+  color: green;
+  font-size: 1em;
+  padding: 0.25em 1em;
+  border-radius: 3px;
 `;
 
 export const Description = styled.h4`

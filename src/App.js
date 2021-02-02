@@ -45,6 +45,9 @@ function App() {
           </Helmet>
           <Home />
         </Route>
+        <Route path={["/form", "/products/:productSlug/edit"]}>
+          <ProductForm />
+        </Route>
         <Route path="/products/:productSlug">
           <ProductDetail />
         </Route>
@@ -54,9 +57,6 @@ function App() {
             <meta name="description" content="Our list of products" />
           </Helmet>
           <ProductList />
-        </Route>
-        <Route path="/form">
-          <ProductForm />
         </Route>
       </Switch>
     </ThemeProvider>

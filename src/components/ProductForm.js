@@ -1,17 +1,26 @@
 import { useState } from "react";
-import { createProduct } from "../store/actions";
-import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { createProduct, updateProduct } from "../store/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory, useParams } from "react-router-dom";
+import { Title } from "../styles";
 
 const ProductForm = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const [product, setProduct] = useState({
-    name: "",
-    price: 0,
-    description: "",
-    image: "",
-  });
+  const { productSlug } = useParams();
+  const oldProduct = useSelector((state) => state.products).find(
+    (product) => product.slug === productSlug
+  );
+
+  const [product, setProduct] = useState(
+    oldProduct ?? {
+      name: "",
+      price: 0,
+      description: "",
+      image: "",
+      id: null,
+    }
+  );
 
   const handleChange = (event) => {
     setProduct({ ...product, [event.target.name]: event.target.value });
@@ -29,13 +38,14 @@ const ProductForm = () => {
   const handleSubmit = (event) => {
     console.log(product);
     event.preventDefault();
-    dispatch(createProduct(product));
+    dispatch(oldProduct ? updateProduct(product) : createProduct(product));
     resetForm();
     history.push("/products");
   };
 
   return (
     <form onSubmit={handleSubmit}>
+      <Title> {oldProduct ? "Update Cookie" : "New Cookie"} </Title>
       <div className="form-group">
         <label>Name</label>
         <input
@@ -75,7 +85,7 @@ const ProductForm = () => {
       <div className="form-group">
         <label>Image</label>
         <input
-          type="url"
+          type="text"
           className="form-control"
           name="image"
           value={product.image}
@@ -85,7 +95,7 @@ const ProductForm = () => {
       </div>
 
       <button type="submit" className="btn btn-primary">
-        Submit
+        {oldProduct ? "Update" : "Create"}
       </button>
     </form>
   );

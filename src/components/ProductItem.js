@@ -3,6 +3,7 @@ import DeleteButton from "./buttons/DeleteButton";
 // Styling
 import { ProductWrapper } from "../styles";
 import { Link } from "react-router-dom";
+import UpdateButton from "./buttons/UpdateButton";
 
 const ProductItem = (props) => {
   const product = props.product;
@@ -18,6 +19,7 @@ const ProductItem = (props) => {
         productId={product.id}
         deleteProduct={props.deleteProduct}
       />
+      <UpdateButton product={product} />
     </ProductWrapper>
   );
 };
