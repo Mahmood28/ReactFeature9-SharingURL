@@ -7,15 +7,17 @@ import App from "./App";
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
-import { createStore } from "redux";
+import { createStore, compose, applyMiddleware } from "redux";
 import reducer from "./store/reducer";
 import { Provider } from "react-redux";
+import thunk from "redux-thunk";
+import { fetchProducts } from "./store/actions";
 
-const store = createStore(
-  reducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
+const composeEnhancers =
+  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose();
 
+const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
+store.dispatch(fetchProducts());
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>

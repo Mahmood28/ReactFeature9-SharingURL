@@ -2,11 +2,17 @@ import productsData from "../products";
 import slugify from "react-slugify";
 
 const initialState = {
-  products: productsData,
+  products: [],
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case "FETCH_PRODUCTS":
+      return {
+        ...state,
+        products: action.payload,
+      };
+
     case "DELETE_PRODUCT":
       return {
         ...state,
